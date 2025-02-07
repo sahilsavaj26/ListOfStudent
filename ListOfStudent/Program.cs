@@ -29,7 +29,7 @@ foreach (StudentModel student in lstStudent)
     //Console.WriteLine(student.Gender == "F" ? student.Name : "Condition Not Satisfied");
 }
 
-// NAME  ADD WITH SURNAME 
+// NAME RETURN WITH THE SURNAME
 
 Student obj1Student = new();
 List<string> lstStudent2 = obj1Student.GetFullNames();
@@ -37,3 +37,24 @@ foreach( string name in lstStudent2)
 {
     Console.WriteLine(name);
 }
+
+// GET FULL NAMES IN A UPPARCASE
+Console.WriteLine("\nFull Names (Name + Surname in Uppercase):");
+List<string> lstStudentName1 = objStudent.GetStudentBasedOnAge(24);
+foreach (string studentName in lstStudentName)
+{
+    Console.WriteLine(studentName);
+}
+
+// Get full names in uppercase
+Console.WriteLine("\nFull Names (Name + Surname in Uppercase):");
+List<string> lstStudent3 = objStudent.GetFullNames();
+foreach (string name in lstStudent2)
+{
+    Console.WriteLine(name.ToUpper());
+}
+
+Console.WriteLine("\nName In Uppercase:");
+List<string>studentR = objStudent.GetaStudentRollNo();
+
+

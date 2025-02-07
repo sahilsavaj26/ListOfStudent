@@ -75,7 +75,32 @@ namespace ListOfStudent.BAL
                 return fullnames;
 
                 }
+        // Get full name (Name + Surname) in uppercase
+           public List<string> FullNames()
+            {
+                List<string> fullNames = new();
+
+                 foreach (StudentModel student in GetStudentList())
+            {
+                string fullName = (student.Name + " " + student.SurName.ToUpper()); // Convert both name and surname to uppercase
+                fullNames.Add(fullName);
             }
+
+            return fullNames;
+            }
+
+        // GET NAME IN A UPPAR CASE
+        public List<string>GetaStudentRollNo()
+        {
+            List<StudentModel>studentR = GetStudentList();
+
+            foreach(StudentModel student in studentR)
+            {
+                Console.WriteLine($"{student.Name.ToUpper()}");
+            }
+            return studentR.Select(x => x.Name).ToList();
         }
+    }
+}
     
 
