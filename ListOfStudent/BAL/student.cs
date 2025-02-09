@@ -62,45 +62,122 @@ namespace ListOfStudent.BAL
             return flterList.Select(x => x.Name).ToList();
         }
 
-            // NAME RETURN WITH THE SURNAME
-           public List <string> GetFullNames()
-                {
-                    List<StudentModel> lstStudent = GetStudentList();
-                    List<string> fullnames = new();
+        // NAME RETURN WITH THE SURNAME
+        public List<string> GetFullNames()
+        {
+            List<StudentModel> lstStudent = GetStudentList();
+            List<string> fullnames = new();
 
-                    foreach (StudentModel student in lstStudent)
-                {
-                    string fullname = student.Name + " " + student.SurName; fullnames.Add(fullname);
-                }
-                return fullnames;
-
-                }
-        // Get full name (Name + Surname) in uppercase
-           public List<string> FullNames()
+            foreach (StudentModel student in lstStudent)
             {
-                List<string> fullNames = new();
+                string fullname = student.Name + " " + student.SurName; fullnames.Add(fullname);
+            }
+            return fullnames;
 
-                 foreach (StudentModel student in GetStudentList())
+        }
+        // Get full name (Name + Surname) in uppercase
+        public List<string> FullNames()
+        {
+            List<string> fullNames = new();
+
+            foreach (StudentModel student in GetStudentList())
             {
                 string fullName = (student.Name + " " + student.SurName.ToUpper()); // Convert both name and surname to uppercase
                 fullNames.Add(fullName);
             }
 
             return fullNames;
-            }
+        }
 
         // GET NAME IN A UPPAR CASE
-        public List<string>GetaStudentRollNo()
+        public List<string> GetaStudentRollNo()
         {
-            List<StudentModel>studentR = GetStudentList();
+            List<StudentModel> studentR = GetStudentList();
 
-            foreach(StudentModel student in studentR)
+            foreach (StudentModel student in studentR)
             {
                 Console.WriteLine($"{student.Name.ToUpper()}");
             }
             return studentR.Select(x => x.Name).ToList();
         }
+
+        //Change Surname In Student 
+        public List<string> GetStudentNewName(string oldName, string NewName)
+        {
+            List<StudentModel> studentName = GetStudentList();
+            foreach (StudentModel student in studentName)
+            {
+                if (student.SurName == oldName)
+                {
+                    student.SurName = NewName;
+                }
+            }
+            return studentName.Select(x => x.SurName).ToList();
+        }
+
+        // Roll_No in a # use
+
+        public List<string> ReplaceRollNo()
+        {
+            List<StudentModel> StudentRollNo = GetStudentList();
+
+            foreach (StudentModel student in StudentRollNo)
+            {
+                if (student.RollNo == "RL_1")
+                {
+                    student.RollNo = "#1";
+                }
+                else if (student.RollNo == "RL_2")
+                {
+                    student.RollNo = "#2";
+                }
+                else if (student.RollNo == "RL_3")
+                {
+                    student.RollNo = "#3";
+                }
+            }
+            return StudentRollNo.Select(x => x.RollNo).ToList();
+
+        }
+
+        //Age Range 
+        public List<string> AgeRange(int FirstRange, int SecondRange)
+        {
+            List<StudentModel> StudentAge = GetStudentList();
+            List<StudentModel> ReturnList = new List<StudentModel>();
+            int CurrentYear = DateTime.Now.Year;
+            foreach (StudentModel student in StudentAge)
+            {
+                //ReturnList.Add(student);
+                if (student.DOB.Year <= DateTime.Now.AddYears(-FirstRange).Year && student.DOB.Year >= DateTime.Now.AddYears(-SecondRange).Year)
+                {
+                    ReturnList.Add(student);
+                }
+            }
+            return ReturnList.Select(x => x.Name + "- Year of birth: " + x.DOB.Year + " Age: " + (CurrentYear - x.DOB.Year)).ToList();
+        }
+
+        //First Latter Add And Get a Student Name:
+
+        public List<string> Startwith()
+        {
+            List<StudentModel> Firstlatter = GetStudentList();
+            List<StudentModel> ReturnList = new List<StudentModel>();
+            Console.WriteLine("Enter your first letter");
+            string Fname = Console.ReadLine();
+            foreach (StudentModel student in Firstlatter)
+            {
+                if (student.Name.StartsWith(Fname))
+                {
+                    ReturnList.Add(student);
+                }
+            }
+           return ReturnList.Select(x => x.Name).ToList();
+           return ReturnList.Select(static x => x.SurName).ToList();
+
+        }
+
     }
-}
-    
+    }
+
 
